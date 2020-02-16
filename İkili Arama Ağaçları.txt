@@ -1,0 +1,21 @@
+ÝKÝLÝ AÐAÇ(Binary Tree)
+Özyineli Taným
+1. boþ olabilir.
+2. Ýki çocuðunda da ikili alt aðaç olan(subtree) düðüm
+3. 1 ve 2 adýmýn sonlu sayýda uygulanmasý ile elde edilen yapýdýr.
+
+
+ÝKÝLÝ ARAMA AÐACI(Binary Search Tree)
+Her düðümün solundakiler kendinden küçük saðýndakiler büyük olucak.En üstteki düðüme root deniyor.(Kök)
+Ýki çocuðu birdeen null olan düðümlere leaf(yaprak)denir.
+
+AÐAÇTAKÝ TEMEL OPERASYONLAR
+Ekleme(Insertion)
+Dolaþma(Treversal)
+Arama(Search)
+Max ve Min Bulma
+Silme(Deletion)
+
+Infix = LNR,RNL (N: Node, L: Left, R: Right)
+Prefix = NLR,NRL
+PostFix = LRN,RLN

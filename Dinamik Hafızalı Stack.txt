@@ -1,0 +1,69 @@
+#include "pch.h"
+#include <iostream>
+using namespace std;
+int boyut = 2;
+int tepe = 0;
+int *dizi;
+int pop()
+{
+	if(tepe <= boyut /4)
+	{
+		int *dizi2 = (int *)malloc(sizeof(int)*boyut / 2);
+		for (int i = 0; i < boyut; i++)
+			dizi2[i] = dizi[i];
+		free(dizi);
+		dizi = dizi2;
+		boyut /= 2;
+	}
+	return dizi[--tepe];
+}
+void push(int a)
+{
+	if(tepe >= boyut)
+	{
+		int *dizi2 = (int *)malloc(sizeof(int)*boyut * 2);
+		for (int i = 0; i < boyut; i++)
+			dizi2[i] = dizi[i];
+		free(dizi);
+		dizi = dizi2;
+		boyut *= 2;
+	}
+	
+	dizi[tepe++] = a;
+}
+void bastir()
+{
+	cout << "Boyut: " << boyut << endl;
+	for (int i = 0; i < tepe; i++)
+	{
+		cout << dizi[i] << " " << endl;
+	}
+}
+int main()
+{
+	dizi = (int*)malloc(sizeof(int)*boyut);
+	push(10);
+	push(20);
+	push(30);
+	push(40);
+	push(50);
+	push(60);
+
+	bastir();
+	cout << "popped " << pop() << endl;
+	cout << "popped " << pop() << endl;
+	cout << "popped " << pop() << endl;
+	cout << "popped " << pop() << endl;
+	cout << "popped " << pop() << endl;
+	cout << "popped " << pop() << endl;
+	bastir();
+	push(150);
+	push(200);
+	push(351);
+	push(489);
+	push(5011);
+	push(6021);
+	bastir();
+
+}
+

@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include <iostream>
+using namespace std;
+#define BOYUT 10
+
+class DaireselKuyruk
+{
+	int kuyrukBasi;
+	int kuyrukSonu;
+	int elemanSayisi;
+	int kuyruk[BOYUT];
+
+public:
+	DaireselKuyruk();
+	bool elemanEkle(int x);
+	bool elemanSil();
+	void yazdir();
+
+};
+DaireselKuyruk::DaireselKuyruk()
+{
+	kuyrukSonu = -1;
+	kuyrukSonu = -1;
+	elemanSayisi = 0;
+}
+
+
+bool DaireselKuyruk::elemanEkle(int x)
+{
+	
+	if (elemanSayisi >= BOYUT)
+	{
+		cout << "Limit doldu" << endl;
+		return false;
+	}
+	else
+	{
+		if (elemanSayisi == 0)
+		{
+			elemanSayisi++;
+			kuyrukBasi = kuyrukSonu = 0;
+			kuyruk[kuyrukSonu] = x;
+		}
+		else if (kuyrukSonu == BOYUT - 1)
+		{
+			kuyrukSonu = 0;
+			kuyruk[kuyrukSonu] = x;
+			elemanSayisi++;
+		}
+		else
+		{
+			kuyrukSonu++;
+			kuyruk[kuyrukSonu] = x;
+			elemanSayisi++;
+		}
+	}
+	return true;
+}
+
+bool DaireselKuyruk::elemanSil()
+{
+	bool basarili = false;
+
+	if (elemanSayisi == 0)
+	{
+		cout << "Silinecek eleman yok" << endl;
+		basarili = false;
+	}
+	else if (elemanSayisi == 1)
+	{
+		kuyrukBasi = -1;
+		kuyrukSonu = -1;
+		elemanSayisi = 0;
+		basarili = true;
+	}
+	else if (kuyrukBasi == BOYUT - 1)
+	{
+		kuyrukBasi = 0;
+		elemanSayisi--;
+		basarili = true;
+	}
+	else
+	{
+		kuyrukBasi++;
+		elemanSayisi--;
+		basarili = true;
+	}
+	return basarili;
+}
+void DaireselKuyruk::yazdir()
+{
+	if (elemanSayisi == 0) {
+		cout << "Yazdirilacak eleman yok " << endl;
+	}
+	else if (kuyrukBasi < kuyrukSonu)
+	{
+		for (int i = kuyrukBasi; i <= kuyrukSonu; i++)
+		{
+			cout << "Elemanlar: " << kuyruk[i] << " " << endl;
+		}
+	}
+	else if (kuyrukBasi > kuyrukSonu)
+	{
+		for (int i = kuyrukSonu; i <= kuyrukBasi; i++)
+		{
+			cout << "Elemanlar: " << kuyruk[i] << " " << endl;
+		}
+		for (int i = kuyrukBasi; i < BOYUT; i++)
+		{
+			cout << "Elemanlar: " << kuyruk[i] << " " << endl;
+		}
+
+	}
+	else
+	{
+		cout << "Eleman: " << kuyruk[kuyrukBasi] << endl;
+	}
+}
+
+int main()
+{
+	DaireselKuyruk k = DaireselKuyruk();
+	k.yazdir();
+	k.elemanEkle(5);
+	k.elemanEkle(6);
+	k.elemanEkle(7);
+
+	k.yazdir();
+	cout << "--------------------------------------------" << endl;
+	k.elemanSil();
+	k.elemanSil();
+	//k.elemanSil();
+	k.yazdir();
+
+}

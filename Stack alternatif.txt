@@ -1,0 +1,138 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include <iostream>
+using namespace std;
+#define BOYUT 10
+class Stack
+{
+	int top;
+	int YIGIN[BOYUT];
+public:
+	Stack();
+	bool Push(int x);
+	bool Pop();
+	bool ISEmpty();
+	int StackTop();
+	void WriteAll();
+	void DeleteAll();
+
+};
+Stack::Stack() {
+	top = -1;   // baþlangýç deðeri
+}
+
+bool Stack::Push(int x)
+{
+	bool basarili = false;
+	if (top <= 9)
+	{
+		top++;
+		YIGIN[top] = x;
+		basarili = true;
+	}
+	return basarili;
+
+}
+bool Stack::Pop()
+{
+	bool basarili = false;
+	if (top != -1)
+	{
+		top--;
+		basarili = true;
+	}
+	return basarili;
+
+}
+bool Stack::ISEmpty() {
+	bool bos = false;
+	if (top == -1)
+	{
+		bos = true;
+	}
+	return bos;
+}
+int Stack::StackTop()
+{
+	if (top != -1)
+		return YIGIN[top];
+	return -1;
+}
+void Stack::DeleteAll()
+{
+	top = -1;
+}
+
+void Stack::WriteAll()
+{
+	if (top != -1) {
+		for (int i = 0; i <= top; i++) {
+			cout << "Dizinin " << (i + 1) << ". inci elemani " << YIGIN[i] << endl;
+		}
+	}
+	else
+		cout << "Yigin bos" << endl;
+
+}
+
+int main()
+{
+	Stack s = Stack();
+	bool calismaZamani = true;
+	
+	while (calismaZamani)
+	{
+		cout << "Eleman eklemek icin 1'e, son elemani silmek icin 2' ye \n" << endl;
+		cout << "Son eklediginiz elemana ulasmak icin 3' e, hepsini yazdirmak icin 4' e \n" << endl;
+		cout << "Hepsini silmek icin 5' e, bos olup olmadigini ogrennmek icin 6' ya basiniz \n" << endl;
+		cout << "Cikis icin 7 ye basin" << endl;
+		int basilan;
+		cin >> basilan;
+		switch (basilan)
+		{
+		case 1 : 
+			cout << "eklemek istediginiz sayiyi giriniz." << endl;
+			int ekle;
+			cin >> ekle;
+			if (s.Push(ekle))
+				cout << "Eleman basari ile eklendi" << endl;
+			else
+				cout << "yigin dolu";
+			break;
+		case 2: 
+			if (s.Pop())
+				cout << "Son eleman basari ile silindi" << endl;
+			else
+				cout << "yigin bos";
+			break;
+		case 3: 
+			if (s.StackTop() != -1)
+				cout << s.StackTop() << endl;
+			else
+				cout << "Yigin bos" << endl;
+			break;
+		case 4:
+			s.WriteAll();
+			break;
+		case 5: 
+			s.DeleteAll();
+			cout << "Hepsi silindi" << endl;
+			break;
+		case 6:
+			if (s.ISEmpty())
+				cout << "Yigin bos" << endl;
+			else
+				cout << "Yigin bos degil" << endl;
+			break;
+		case 7: 
+			cout << "Bizi tercih ettiginiz icin tesekkurler... " << endl;
+			calismaZamani = false;
+
+		default:
+			break;
+		}
+	}
+
+
+
+}

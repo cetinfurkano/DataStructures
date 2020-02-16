@@ -1,0 +1,77 @@
+#include "pch.h"
+#include <iostream>
+using namespace std;
+struct n
+{
+	int x;
+	n * next;
+};
+typedef n node;
+node * ekle(node * r, int x)
+{
+	node * iter = r;
+	if(r == NULL)
+	{
+		r = (node *)malloc(sizeof(node));
+		r->next = NULL;
+		r->x = x;
+		return r;
+	}
+	while(iter ->next != NULL)
+	{
+		iter = iter->next;
+	}
+	iter->next = (node*)malloc(sizeof(node));
+	iter->next->next = NULL;
+	iter->next->x = x;
+	return r;
+}
+
+node * sil(node * r)
+{
+	node * temp;
+	node *iter = r;
+	if(r == NULL)
+	{
+		cout << "Silinecek deðer yok.." << endl;
+		return r;
+	}
+    
+	while (iter->next->next != NULL)
+		iter = iter->next;
+	temp = iter -> next;
+	iter->next = NULL;
+	free(temp);
+	return r;
+
+}
+void bastir(node* r)
+{
+	while( r != NULL)
+	{
+		cout << r->x << endl;
+		r = r->next;
+	}
+}
+int main()
+{
+	node * r = NULL;
+	r = ekle(r, 5);
+	r = ekle(r, 6);
+	r = ekle(r, 7);
+	r = ekle(r, 8);
+	r = ekle(r, 9);
+	r = sil(r);
+	r = sil(r);
+	r = ekle(r, 8);
+	r = ekle(r, 9);
+	r = sil(r);
+	bastir(r);
+}
+
+
+
+
+
+
+ 

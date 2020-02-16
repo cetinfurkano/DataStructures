@@ -1,0 +1,91 @@
+#include "pch.h"
+#include <iostream>
+using namespace std;
+
+struct n
+{
+	int x;
+	n * next;
+};
+typedef n node;
+node * kuyrukBasi = NULL;
+node * kuyrukSonu = NULL;
+
+node* ekle(node* r,int x)
+{
+	if(r == NULL)
+	{
+		r = (node*)malloc(sizeof(node));
+		r->next = NULL;
+		r->x = x;
+		kuyrukBasi = r;
+		kuyrukSonu = r;
+		return r;
+	}
+
+	else
+	{
+		node * iter = r;
+		while (iter->next != NULL)
+			iter = iter->next;
+		kuyrukSonu = iter;
+		kuyrukSonu->next = (node*)malloc(sizeof(node));
+		kuyrukSonu->next->x = x;
+		kuyrukSonu->next->next = NULL;
+		kuyrukSonu = kuyrukSonu->next;
+		return r;
+	}
+	
+	
+}
+node * sil(node * r)
+{
+	if(r == NULL)
+	{
+		cout << "Silinecek deger yok.." << endl;
+		return r;
+	}
+	else
+	{
+		node * temp = kuyrukBasi;
+		kuyrukBasi = kuyrukBasi->next;
+		free(temp);
+		return kuyrukBasi;
+	}
+}
+void bastir()
+{
+	node * iter = kuyrukBasi;
+	while (iter != kuyrukSonu)
+	{
+		cout << iter->x << endl;
+		iter = iter->next;
+	}
+	cout << kuyrukSonu->x << endl;
+}
+
+int main()
+{
+	node * r = NULL;
+	r = ekle(r, 3);
+	r = ekle(r, 2);
+	r = ekle(r, 4);
+	r = ekle(r, 5);
+	r = ekle(r, 6);
+	cout << "-----------------" << endl;
+	bastir();
+	r = sil(r);
+	r = sil(r);
+	r = sil(r);
+
+	cout << "-----------------" << endl;
+	bastir();
+
+}
+
+
+
+
+
+
+ 

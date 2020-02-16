@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+
+class Liste
+{
+public:
+	int x;
+	Liste* next;
+	void ekle(Liste* p, int deger);
+	void bastir(Liste* p);
+	Liste* arayaEkle(Liste*p, int deger, int index);
+	Liste* sil(Liste *p, int deger);
+
+};
+
+void Liste::ekle(Liste *p, int deger)
+{
+	while (p->next != NULL)
+	{
+		p = p->next;
+	}
+	p->next = (Liste*)malloc(sizeof(Liste));
+	p->next->x = deger;
+	p->next->next = NULL;
+
+
+}
+void Liste::bastir(Liste* p)
+{
+	while (p != NULL)
+	{
+		cout << p->x << endl;
+		p = p->next;
+	}
+}
+
+Liste* Liste::arayaEkle(Liste *p, int deger, int index)
+{
+	Liste *iter = p;
+	Liste *temp;
+	for (int i = 0; i < index-2; i++) 
+	{
+		iter = iter->next;
+	}
+	temp = (Liste*)malloc(sizeof(Liste));
+	temp->x = deger;
+	temp->next = iter->next;
+	iter->next = temp;
+	return p;
+}
+
+Liste * Liste::sil(Liste *r, int deger)
+{
+	Liste* temp;
+	Liste *iter = r;
+	if (r == NULL) {
+		cout << "Listeniz zaten bos" << endl;
+		return r;
+	}
+	if (r->x == deger)
+	{
+		r = r->next;
+		free(iter);
+		return r;
+	}
+	while (iter->next->x != deger && iter->next != NULL) {
+		iter = iter->next;
+	}
+	if (iter->next == NULL) {
+		cout << "Sayi bulunamadi" << endl;
+		return r;
+	}
+
+	temp = iter->next;
+	iter->next = iter->next->next;
+	free(temp);
+	return r;
+
+}
+
+
+int main()
+{
+	Liste *p;
+	p = (Liste*)malloc(sizeof(Liste));
+	p->x = 15;
+	p->next = NULL;
+	p->ekle(p, 25);
+	p->ekle(p, 35);
+	p->ekle(p, 55);
+	p->ekle(p, 65);
+
+	p = p->arayaEkle(p, 16, 4);
+
+	p = p->sil(p, 55);
+
+	p->bastir(p);
+}

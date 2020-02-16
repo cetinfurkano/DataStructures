@@ -1,0 +1,128 @@
+#include <stdio.h>
+#include<stdlib.h>
+#include <iostream>
+using namespace std;
+#define BOYUT 10
+
+class Stack {
+	int top;
+	int YIGIN[BOYUT];
+
+public:
+	Stack();
+	bool Push(int x); // en tepeye eleman ekle
+	int Pop();  // en tepeden eleman sil
+	bool IsEmpty();
+
+	int StackTop();  // yýðýnýn tepesindeki bir elemaný göster.
+	void writeAll();
+	void deleteAll();
+
+};
+
+Stack::Stack()
+{
+	top = -1; // baþlangýç konuma getir. top = boyut-1 olursa yýðýn dolu demektir.
+}
+bool Stack::Push(int x)
+{
+	if (top >= (BOYUT - 1)) {
+		cout << "Yýðýn dolu" << endl;
+		return false;
+	}
+	else {
+		YIGIN[++top] = x;
+		cout << x << " elemaný yýðýna eklendi." << endl;
+		return true;
+	}
+}
+
+int Stack::Pop()  // son eklenen elamaný silme
+{
+	if (top < 0) {
+		cout << "Yýðýn boþ";
+		return 0;
+	}
+	else
+	{
+		int x = YIGIN[top--];
+		return x;
+	}
+}
+bool Stack::IsEmpty() {
+	if (top < 0) {
+		cout << "Yýðýn boþ";
+		return true;
+	}
+	else
+		return false;
+
+}
+int Stack::StackTop() 
+{
+	if (top < 0) {
+		cout << "yýðýna eleman eklenmemiþ";
+		return -1;
+	}
+	else {
+		return YIGIN[top];
+	}
+}
+void Stack::deleteAll()
+{
+	top = -1;
+}
+void Stack::writeAll() 
+{
+	if (top < 0) {
+		cout << "Yazýlacak eleman yok" << endl;
+	}
+	else
+		for (int i = top; i>=0; i--) {
+			cout << YIGIN[i] << endl;
+		}
+}
+int main()
+{
+	Stack s1 = Stack();
+	int giris;
+    bool calismaZamani = true;
+	while (calismaZamani)
+	{
+		cout << "Eleman eklemek icin 1' e basiniz."<<endl;
+		cout << "Eleman son eklenen elemani silmek icin 2 ye basiniz." << endl;
+		cout << "Yigini yazdirmak icin 3 e basiniz." << endl;
+		cout << "Yigini bosaltmak icin 4 e basiniz." << endl;
+		cout << "Cýkmak için 5 e basiniz." << endl << endl;
+		cin >> giris;
+		switch (giris)
+		{
+		case 1:
+			int eleman;
+			cout << "Eklemek istediginiz elemani giriniz: ";
+			cin >> eleman;
+			s1.Push(eleman);
+			cout << endl;
+			break;
+		case 2: 
+			cout << "Son eklenen eleman silindi." << s1.Pop() << endl;
+			cout << endl;
+			break;
+		case 3: s1.writeAll();
+			cout << endl;
+			break;
+		case 4: s1.deleteAll();
+			cout << endl;
+			cout << "elemanlar basari ile silindi.";;
+		case 5: cout<< "islem sonlandirildi. ";
+			cout << endl; 
+			calismaZamani = false;
+		default:
+			break;
+		}
+	}
+	
+	
+	
+
+}
